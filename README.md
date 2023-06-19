@@ -15,6 +15,7 @@ java -cp IPDRProducer.jar data.generator.IPDRDataProducer secondary-5.secondary.
 
 ## Sample IPDR Message Format:
 
+```
 {
    "batchId":"xxx.xxx.xx.xx",						<IPV4 Address>
    "cmIp":{
@@ -90,3 +91,4 @@ java -cp IPDRProducer.jar data.generator.IPDRDataProducer secondary-5.secondary.
    "usTimeActive":58694,
    "v":1
 }
+```
