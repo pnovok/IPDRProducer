@@ -7,11 +7,14 @@
 4) Sleep before proceeding to the next message
 
 ## Usage: 
-
+```
 java -cp IPDRDataProducer.jar data.generator.IPDRDataProducer <bootstrap_server_name:port> <kafka_topic> <number_of_messages_to_generate> <input_rate_ms>
-
+```
 Example: to generate 10 messages with sleep time of 1 sec in-between:
+
+```
 java -cp IPDRProducer.jar data.generator.IPDRDataProducer secondary-5.secondary.root.hwx.site:9092 mytopic 10 1000
+```
 
 ## Sample IPDR Message Format:
 
