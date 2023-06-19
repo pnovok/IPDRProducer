@@ -1,4 +1,4 @@
-This is a simple data generator of IPDR records
+#This is a simple data generator of IPDR records
 
 Main logic:
 1) Generate IPDR record fields. I'm using faker Java library.
