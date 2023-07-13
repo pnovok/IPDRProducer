@@ -21,7 +21,9 @@ public class DataGenerator {
         Faker fakeData = new Faker();
         message.setBatchId(fakeData.internet().ipV4Address());
         message.setCmIp(fakeData.internet().ipV4Address());
-        message.setCmMacAddr(fakeData.internet().macAddress());
+        //message.setCmMacAddr(fakeData.internet().macAddress());
+        //I'm getting 100 MAC addresses, this can be changed
+        message.setCmMacAddr(fakeData.number().numberBetween(1,100));
         message.setCmtsHostName(fakeData.internet().domainName());
         message.setCmtsIp((fakeData.internet().ipV6Address()));
         message.setDsChSet_Cnt(fakeData.number().numberBetween(3,10));
@@ -57,7 +59,7 @@ public class DataGenerator {
         String cmIp = "\"cmIp\":{\"v4\":"+"\""+message.getCmIp()+"\"},";
 
         //Get cmMacAddr
-        String cmMacAddr="\"cmMacAddr\":"+"\""+ message.getCmMacAddr()+"\",";
+        String cmMacAddr="\"cmMacAddr\":"+"\""+ "MACADDR"+message.getCmMacAddr() +"\",";
 
         //Get cmtsHostName
         String cmtsHostName="\"cmtsHostName\":"+"\""+message.getCmtsHostName()+"\",";

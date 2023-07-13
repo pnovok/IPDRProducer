@@ -5,7 +5,8 @@ import java.util.Date;
 public class IPDRRecord {
     private String batchId;
     private String cmIp;
-    private String cmMacAddr;
+    //private String cmMacAddr;
+    private Integer cmMacAddr;
     private String cmtsHostName;
     private String cmtsIp;
     private Integer dsChSet_Cnt;
@@ -183,7 +184,6 @@ public class IPDRRecord {
         this.cmtsIp = cmtsIp;
     }
 
-
     public String getCmtsHostName() {
         return cmtsHostName;
     }
@@ -192,11 +192,11 @@ public class IPDRRecord {
         this.cmtsHostName = cmtsHostName;
     }
 
-    public String getCmMacAddr() {
+    public Integer getCmMacAddr() {
         return cmMacAddr;
     }
 
-    public void setCmMacAddr(String cmMacAddr) {
+    public void setCmMacAddr(Integer cmMacAddr) {
         this.cmMacAddr = cmMacAddr;
     }
 

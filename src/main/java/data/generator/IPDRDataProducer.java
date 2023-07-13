@@ -1,15 +1,18 @@
 package data.generator;
 
-import java.util.Properties;
-//import util.properties packages
-import java.util.Properties;
-//import simple producer packages
-import org.apache.kafka.clients.producer.Producer;
-//import KafkaProducer packages
 import org.apache.kafka.clients.producer.KafkaProducer;
-//import ProducerRecord packages
+import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerRecord;
-import static data.generator.DataGenerator.*;
+
+import java.util.Properties;
+
+import static data.generator.DataGenerator.buildIPDRMessage;
+import static data.generator.DataGenerator.generateIPDRMessage;
+
+//import util.properties packages
+//import simple producer packages
+//import KafkaProducer packages
+//import ProducerRecord packages
 
 public class IPDRDataProducer {
     public static void main(String args[]){
