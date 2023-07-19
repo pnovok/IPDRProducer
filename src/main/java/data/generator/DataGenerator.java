@@ -23,7 +23,7 @@ public class DataGenerator {
         message.setCmIp(fakeData.internet().ipV4Address());
         //message.setCmMacAddr(fakeData.internet().macAddress());
         //I'm getting 100 MAC addresses, this can be changed
-        message.setCmMacAddr(fakeData.number().numberBetween(1,100));
+        message.setCmMacAddr(fakeData.number().numberBetween(1,10));
         message.setCmtsHostName(fakeData.internet().domainName());
         message.setCmtsIp((fakeData.internet().ipV6Address()));
         message.setDsChSet_Cnt(fakeData.number().numberBetween(3,10));

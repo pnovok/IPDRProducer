@@ -1,8 +1,10 @@
 package data.generator;
 
+import org.apache.kafka.clients.CommonClientConfigs;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerRecord;
+import org.apache.kafka.common.config.SslConfigs;
 
 import java.util.Properties;
 
@@ -18,9 +20,14 @@ public class IPDRDataProducer {
     public static void main(String args[]){
 
         // Check arguments length value
-        if(args.length != 4){
-            System.out.println("Usage: java -cp IPDRDataProducer.jar data.generator.IPDRDataProducer " +
-                    "<bootstrap_server_name:port> <kafka_topic> <number_of_messages_to_generate> <input_rate_ms>");
+        if(args.length < 4 || args.length > 5) {
+            System.out.println("Usage on Secured SASL_SSL cluster: java -cp IPDRDataProducer.jar data.generator.IPDRDataProducer " +
+                    "<bootstrap_server_name:9093> <kafka_topic> <number_of_messages_to_generate> <input_rate_ms>" +
+                    " <path_to_truststore_file/truststore_file.jks>\n");
+
+            System.out.println("Usage on Unsecured cluster: java -cp IPDRDataProducer.jar data.generator.IPDRDataProducer " +
+                    "<bootstrap_server_name:9092> <kafka_topic> <number_of_messages_to_generate> <input_rate_ms>");
+
             return;
         }
 
@@ -32,6 +39,19 @@ public class IPDRDataProducer {
 
         // create instance for properties to access producer configs
         Properties props = new Properties();
+
+        if(args.length > 4 ) {
+            String truststorePathName = args[4];
+           //configure the following three settings for SSL Encryption
+           props.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SASL_SSL");
+           props.put(SslConfigs.SSL_TRUSTSTORE_LOCATION_CONFIG, truststorePathName);
+//            //props.put(SslConfigs.SSL_TRUSTSTORE_PASSWORD_CONFIG,  "test1234");
+
+            //configure the following three settings for Kerberos Authentication
+            props.put("sasl.kerberos.service.name", "kafka");
+            props.put("sasl.jaas.config", "com.sun.security.auth.module.Krb5LoginModule required useTicketCache=true;");
+
+        }
 
         //Assign localhost id
         props.put("bootstrap.servers", bootstrapServer);
