@@ -10,6 +10,7 @@
 ```
 java -cp IPDRDataProducer.jar data.generator.IPDRDataProducer <bootstrap_server_name:port> <kafka_topic> <number_of_messages_to_generate> <input_rate_ms>
 ```
+Note: This was tested on Kafka version 2.5.0.7.1.7.1000-142
 Example: to generate 10 messages with sleep time of 1 sec in-between:
 
 ```
@@ -22,6 +23,7 @@ java -cp IPDRProducer.jar data.generator.IPDRDataProducer secondary-5.secondary.
 java -cp IPDRDataProducer.jar data.generator.IPDRDataProducer <bootstrap_server_name:9093> <kafka_topic> <number_of_messages_to_generate> <input_rate_ms>" +
 <path_to_truststore_file/truststore_file.jks>
 ```
+Note: This was tested on Kafka version 3.4.0.7.2.17.0-334
 Example: to generate 10 messages with sleep time of 1 sec in-between on a secured Kafka cluster with the truststore.jks file:
 
 ```
