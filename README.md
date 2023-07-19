@@ -10,7 +10,7 @@
 ```
 java -cp IPDRDataProducer.jar data.generator.IPDRDataProducer <bootstrap_server_name:port> <kafka_topic> <number_of_messages_to_generate> <input_rate_ms>
 ```
-Note: This was tested on Kafka version 2.5.0.7.1.7.1000-142
+Note: This was tested on Kafka version 2.5.0.7.1.7.1000-142 
 Example: to generate 10 messages with sleep time of 1 sec in-between:
 
 ```
