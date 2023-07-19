@@ -24,12 +24,12 @@ java -cp IPDRProducer.jar data.generator.IPDRDataProducer secondary-5.secondary.
 java -cp IPDRDataProducer.jar data.generator.IPDRDataProducer <bootstrap_server_name:9093> <kafka_topic> <number_of_messages_to_generate> <input_rate_ms>" +
 <path_to_truststore_file/truststore_file.jks>
 ```
-Note: This was tested on Kafka version 3.4.0.7.2.17.0-334
+Note: This was tested on Kafka version 3.4.0.7.2.17.0-334 on CDP Public Cloud Data Hub cluster
 
 Example: to generate 10 messages with sleep time of 1 sec in-between on a secured Kafka cluster with the truststore.jks file:
 
 ```
-java -cp IPDRProducer.jar data.generator.IPDRDataProducer secondary-5.secondary.root.hwx.site:9092 mytopic 10 1000 /home/pnovokshonov/truststore.jks
+java -cp IPDRProducer.jar data.generator.IPDRDataProducer secondary-5.secondary.root.hwx.site:9093 mytopic 10 1000 /home/pnovokshonov/truststore.jks
 ```
 ## Sample IPDR Message Format:
 
