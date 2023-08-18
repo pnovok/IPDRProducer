@@ -6,6 +6,8 @@ import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.config.SslConfigs;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Properties;
 
 import static data.generator.DataGenerator.buildIPDRMessage;
@@ -82,7 +84,11 @@ public class IPDRDataProducer {
         Producer<String, String> producer = new KafkaProducer
                 <String, String>(props);
 
-        System.out.println("Starting Data generation ... ");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime start_dt = LocalDateTime.now();
+
+        System.out.println("Starting IPDR Data generation at " + dtf.format(start_dt));
+
         try {
             for (int i=1; i<=numberOfMessagesToGenerate; i++) {
                 //generateIPDRMessage
@@ -95,7 +101,10 @@ public class IPDRDataProducer {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println("All IPDR messages sent successfully");
+
+        LocalDateTime end_dt = LocalDateTime.now();
+
+        System.out.println("All IPDR messages sent successfully at "+ dtf.format(end_dt));
         producer.close();
 
     }
