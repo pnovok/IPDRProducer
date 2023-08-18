@@ -17,13 +17,14 @@ public class DataGenerator {
 
 
     //This will generate most of the fields for IPDR message
-    public static void generateIPDRMessage(){
+    public static void generateIPDRMessage(int itterationNum){
         Faker fakeData = new Faker();
         message.setBatchId(fakeData.internet().ipV4Address());
         message.setCmIp(fakeData.internet().ipV4Address());
         //message.setCmMacAddr(fakeData.internet().macAddress());
         //I'm getting 100 MAC addresses, this can be changed
-        message.setCmMacAddr(fakeData.number().numberBetween(1,100));
+        //message.setCmMacAddr(fakeData.number().numberBetween(1,5));
+        message.setCmMacAddr(itterationNum);
         message.setCmtsHostName(fakeData.internet().domainName());
         message.setCmtsIp((fakeData.internet().ipV6Address()));
         message.setDsChSet_Cnt(fakeData.number().numberBetween(3,10));
@@ -32,7 +33,7 @@ public class DataGenerator {
         message.setDsPackets(fakeData.number().numberBetween(1000,9999));
         message.setDsScn(fakeData.options().option("data", "video","telephony","default","both"));
         message.setDsTimeActive(fakeData.number().numberBetween(10000,99999));
-        message.setFromTime(fakeData.date().past(2, TimeUnit.HOURS));
+        message.setFromTime(fakeData.date().past(5, TimeUnit.SECONDS));
         message.setMdIfIndex(fakeData.number().numberBetween(1000,9999));
         message.setMdIfName(fakeData.options().option("Cable3/0/4","Cable1/0/5","Cable2/1/6"));
         message.setQosVersion(fakeData.number().numberBetween(1,5));
@@ -181,9 +182,15 @@ public class DataGenerator {
                 .append(toTimeStr).append(usChSet).append(usIdentifier).append(usOctets)
                 .append(usPackets).append(usScn).append(usTimeActive).append(v).toString();
 
+//        String msgString = new StringBuilder().append(batchId).append(cmIp).append(cmMacAddr).append(cmtsHostName).append(cmtsIp)
+//                 .append(dsChSet).append(dsIdentifier).append(dsOctets).append(dsPackets).append(dsScn).append(dsTimeActive)
+//                 .append(fromTimeStr).append(mdIfIndex).append(mdIfName).append(qosVersion).append(region).append(timeZone)
+//                .append(toTimeStr).append(v).toString();
+
+      //  System.out.print(msgString+"\n");
         return msgString;
 
-       // System.out.print(msgString+"\n");
+
 
     }
 }

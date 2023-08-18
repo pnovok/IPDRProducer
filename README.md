@@ -8,105 +8,55 @@
 
 ## Usage on Unsecured Cluster: 
 ```
-java -cp IPDRDataProducer.jar data.generator.IPDRDataProducer <bootstrap_server_name:port> <kafka_topic> <number_of_messages_to_generate> <input_rate_ms>
+java -cp IPDRDataProducer.jar data.generator.IPDRDataProducer <bootstrap_server_name:port> <kafka_topic> <number_of_messages_to_generate> <input_rate_milliseconds> <macAddress_start_offset>
 ```
 Note: This was tested on Kafka version 2.5.0.7.1.7.1000-142 
 
-Example: to generate 10 messages with sleep time of 1 sec in-between:
+Example: to generate 10 messages with sleep time of 1 sec in-between and a distinct mac addresses of MACADDR1 through MACADDR10:
 
 ```
-java -cp IPDRProducer.jar data.generator.IPDRDataProducer secondary-5.secondary.root.hwx.site:9092 mytopic 10 1000
+java -cp IPDRProducer.jar data.generator.IPDRDataProducer secondary-5.secondary.root.hwx.site:9092 mytopic 10 1000 0
  
 ```
 ## Usage on Secured SASL_SSL (Kerberos) Cluster:
 
 ```
-java -cp IPDRDataProducer.jar data.generator.IPDRDataProducer <bootstrap_server_name:9093> <kafka_topic> <number_of_messages_to_generate> <input_rate_ms>" +
+java -cp IPDRDataProducer.jar data.generator.IPDRDataProducer <bootstrap_server_name:9093> <kafka_topic> <number_of_messages_to_generate> <input_rate_milliseconds>" +
 <path_to_truststore_file/truststore_file.jks>
 ```
 Note: This was tested on Kafka version 3.4.0.7.2.17.0-334 on CDP Public Cloud Data Hub cluster. The code was deployed on the broker node.
 
-Example: to generate 10 messages with sleep time of 1 sec in-between on a secured Kafka cluster with the truststore.jks file:
+Example: to generate 10 messages with sleep time of 1 sec in-between and a distinct mac addresses of MACADDR1 through MACADDR10 on a secured Kafka cluster with the truststore.jks file:
 
 ```
-java -cp IPDRProducer.jar data.generator.IPDRDataProducer secondary-5.secondary.root.hwx.site:9093 mytopic 10 1000 /home/pnovokshonov/truststore.jks
+java -cp IPDRProducer.jar data.generator.IPDRDataProducer secondary-5.secondary.root.hwx.site:9093 mytopic 10 1000 0 /home/pnovokshonov/truststore.jks
 ```
 ## Sample IPDR Message Format:
 
 ```
-{
-   "batchId":"xxx.xxx.xx.xx",						<IPV4 Address>
-   "cmIp":{
-      "v4":"xx.xx.xx.xx"							<IPV4 Address>
-   },
-   "cmMacAddr":"123456ABCDEF",
-   "cmtsHostName":"TESTRPCC01.ga.at.cox.net",
-   "cmtsIp":{
-      "v4":"xxx.xxx.xx.xx", 						<Same as batchId>
-      "v6":"xxxx:xxx:xexx:x:xxx:xxx:xx:xx"			<IPV6 Address>
-   },
-   "dsChSet":[
-      17,
-      18,
-      19,
-      20,
-      21,
-      22,
-      23,
-      24,
-      25,
-      26,
-      27,
-      28,
-      29,
-      30,
-      31,
-      32,
-      33,
-      34,
-      35,
-      36,
-      37,
-      38,
-      39,
-      40,
-      41,
-      42,
-      43,
-      44,
-      45,
-      46,
-      47,
-      48,
-      159
-   ],
-   "dsIdentifier":8000,
-   "dsOctets":757040,
-   "dsPackets":1570,
-   "dsScn":"vidiptvdn",
-   "dsTimeActive":58694,
-   "fromTime":"2023-05-23T12:15:00Z",
-   "mdIfIndex":1149,
-   "mdIfName":"Cable3/0/4",
-   "qosVersion":2,
-   "region":"Atlanta",
-   "timeZone":"UTC",
-   "toTime":"2023-05-23T12:30:00Z",
-   "usChSet":[
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8
-   ],
-   "usIdentifier":12907,
-   "usOctets":157877,
-   "usPackets":1374,
-   "usScn":"vidiptvup",
-   "usTimeActive":58694,
-   "v":1
-}
+{"batchId":"103.65.107.58",
+"cmIp":{"v4":"198.75.91.98"},
+"cmMacAddr":"MACADDR39",
+"cmtsHostName":"schaefer.info",
+"cmtsIp":{"v4":"103.65.107.58","v6":"cb20:8db0:c3bf:247b:d593:a9f2:1c2f:50af"},
+"dsChSet":[31,70,79,26],
+"dsIdentifier":5957,
+"dsOctets":635159,
+"dsPackets":6099,
+"dsScn":"default",
+"dsTimeActive":35962,
+"fromTime":"2023-08-01 19:15:00",
+"mdIfIndex":2869,
+"mdIfName":"Cable2/1/6",
+"qosVersion":3,
+"region":"Charlotte",
+"timeZone":"EST",
+"toTime":"2023-08-01 19:30:00",
+"usChSet":[0,6,9,9,8,0,3],
+"usIdentifier":89100,
+"usOctets":584150,
+"usPackets":23106,
+"usScn":"default",
+"usTimeActive":21239,
+"v":2}
 ```

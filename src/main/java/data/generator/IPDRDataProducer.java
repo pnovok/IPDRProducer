@@ -20,13 +20,13 @@ public class IPDRDataProducer {
     public static void main(String args[]){
 
         // Check arguments length value
-        if(args.length < 4 || args.length > 5) {
+        if(args.length < 5 || args.length > 6) {
             System.out.println("Usage on Secured SASL_SSL cluster: java -cp IPDRDataProducer.jar data.generator.IPDRDataProducer " +
                     "<bootstrap_server_name:9093> <kafka_topic> <number_of_messages_to_generate> <input_rate_ms>" +
-                    " <path_to_truststore_file/truststore_file.jks>\n");
+                    "<macAddress_start_offset> <path_to_truststore_file/truststore_file.jks>\n");
 
             System.out.println("Usage on Unsecured cluster: java -cp IPDRDataProducer.jar data.generator.IPDRDataProducer " +
-                    "<bootstrap_server_name:9092> <kafka_topic> <number_of_messages_to_generate> <input_rate_ms>");
+                    "<bootstrap_server_name:9092> <kafka_topic> <number_of_messages_to_generate> <input_rate_ms> <macAddress_start_offset>");
 
             return;
         }
@@ -36,12 +36,14 @@ public class IPDRDataProducer {
         String topicName = args[1].toString();
         Integer numberOfMessagesToGenerate = Integer.valueOf(args[2]);
         Integer inputRate = Integer.valueOf(args[3]);
+        Integer macAddrStartOffset = Integer.valueOf(args[4]);
+
 
         // create instance for properties to access producer configs
         Properties props = new Properties();
 
-        if(args.length > 4 ) {
-            String truststorePathName = args[4];
+        if(args.length > 5 ) {
+            String truststorePathName = args[5];
            //configure the following three settings for SSL Encryption
            props.put(CommonClientConfigs.SECURITY_PROTOCOL_CONFIG, "SASL_SSL");
            props.put(SslConfigs.SSL_TRUSTSTORE_LOCATION_CONFIG, truststorePathName);
@@ -84,7 +86,7 @@ public class IPDRDataProducer {
         try {
             for (int i=1; i<=numberOfMessagesToGenerate; i++) {
                 //generateIPDRMessage
-                generateIPDRMessage();
+                generateIPDRMessage(i+macAddrStartOffset);
                 //Build an IPDR final JSON string and send it to Kafka topic
                 producer.send(new ProducerRecord<String, String>(topicName, Integer.toString(i), buildIPDRMessage()));
                 //Sleep between getting the next message
