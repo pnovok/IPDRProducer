@@ -29,11 +29,14 @@ public class DataGenerator {
         message.setCmtsIp((fakeData.internet().ipV6Address()));
         message.setDsChSet_Cnt(fakeData.number().numberBetween(3,10));
         message.setDsIdentifier(fakeData.number().numberBetween(1000,9999));
-        message.setDsOctets(fakeData.number().numberBetween(100000,999999));
-        message.setDsPackets(fakeData.number().numberBetween(1000,9999));
-        //message.setDsScn(fakeData.options().option("data", "video","telephony","default","both"));
+        //message.setDsOctets(fakeData.number().numberBetween(100000,999999));
+        message.setDsOctets(fakeData.number().numberBetween(1000,1000));
 
+        message.setDsPackets(fakeData.number().numberBetween(1000,9999));
+
+        //message.setDsScn(fakeData.options().option("data", "video","telephony","default","both"));
         message.setDsScn(fakeData.options().option("data"));
+
         message.setDsTimeActive(fakeData.number().numberBetween(10000,99999));
         message.setFromTime(fakeData.date().past(5, TimeUnit.SECONDS));
         message.setMdIfIndex(fakeData.number().numberBetween(1000,9999));
@@ -189,7 +192,7 @@ public class DataGenerator {
 //                 .append(fromTimeStr).append(mdIfIndex).append(mdIfName).append(qosVersion).append(region).append(timeZone)
 //                .append(toTimeStr).append(v).toString();
 
-      //  System.out.print(msgString+"\n");
+   //     System.out.print(msgString+"\n");
         return msgString;
 
 
