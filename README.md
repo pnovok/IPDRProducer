@@ -21,8 +21,7 @@ java -cp IPDRProducer.jar data.generator.IPDRDataProducer secondary-5.secondary.
 ## Usage on Secured SASL_SSL (Kerberos) Cluster:
 
 ```
-java -cp IPDRDataProducer.jar data.generator.IPDRDataProducer <bootstrap_server_name:9093> <kafka_topic> <number_of_messages_to_generate> <input_rate_milliseconds>" +
-<path_to_truststore_file/truststore_file.jks>
+java -cp IPDRDataProducer.jar data.generator.IPDRDataProducer <bootstrap_server_name:9093> <kafka_topic> <number_of_messages_to_generate> <input_rate_milliseconds> <macAddress_start_offset> <path_to_truststore_file/truststore_file.jks>
 ```
 Note: This was tested on Kafka version 3.4.0.7.2.17.0-334 on CDP Public Cloud Data Hub cluster. The code was deployed on the broker node.
 
